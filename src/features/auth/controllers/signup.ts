@@ -11,6 +11,8 @@ import { userCache } from '@service/redis/user.cache';
 import HTTP_STATUS from 'http-status-codes';
 import { authQueue } from '@service/queue/auth.queue';
 import { userQueue } from '@service/queue/user.queue';
+import JWT from 'jsonwebtoken';
+import { config } from '@root/config';
 export class Signup {
   @joiRequestBodyValidation(signupSchema)
   public async create(req: Request, res: Response): Promise<void> {
@@ -35,6 +37,9 @@ export class Signup {
 
     authQueue.addAuthUserJob('addAuthUserToDB', { value: authData });
     userQueue.addUserJob('addUserToDB', { value: userDataForCache });
+
+    const userAuthToken: string = Signup.prototype.signToken(authData, userObjectId);
+    req.session = { jwt: userAuthToken };
     res.status(HTTP_STATUS.CREATED).json({ message: 'User created successfully', authData, user: userDataForCache });
   }
   private signupData(data: ISignupData): IAuthDocument {
@@ -72,5 +77,8 @@ export class Signup {
       orders: [],
       wishlist: []
     } as unknown as IUserDocument;
+  }
+  private signToken(data: IAuthDocument, userObjectId: ObjectId): string {
+    return JWT.sign({ userId: userObjectId, uId: data.uId }, config.JWT_TOKEN!);
   }
 }
