@@ -11,7 +11,11 @@ export class Helper {
 
     for (const [key, value] of Object.entries(data)) {
       if (typeof value !== 'object') {
-        result[key] = `${value}`;
+        if (typeof value == 'string') {
+          result[key] = value;
+        } else {
+          result[key] = `${value}`;
+        }
       } else if (typeof value === 'object') {
         result[key] = JSON.stringify(value);
       }

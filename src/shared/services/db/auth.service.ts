@@ -12,6 +12,10 @@ class AuthService {
     const user: IAuthDocument = (await AuthModel.findOne(query)) as IAuthDocument;
     return user;
   }
+  public async getAuthUserByEmail(email: string): Promise<IAuthDocument> {
+    const user: IAuthDocument = (await AuthModel.findOne({ email: email.toLowerCase() })) as IAuthDocument;
+    return user;
+  }
 }
 
 export const authService: AuthService = new AuthService();

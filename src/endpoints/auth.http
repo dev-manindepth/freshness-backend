@@ -8,7 +8,18 @@ withCredentials: true
 
 {
   "username": "manish",
-  "email": "manish32343@gmail.com",
+  "email": "manish4123@gmail.com",
   "password":"328043",
-  "phoneNumber":"2323432323"
+  "phoneNumber":"5320732323"
+}
+
+###
+POST {{baseUrl}}/{{urlPath}}/signin
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "email": "manish4123@gmail.com",
+  "password":"328043"
 }
