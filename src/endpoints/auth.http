@@ -23,3 +23,9 @@ withCredentials: true
   "email": "manish4123@gmail.com",
   "password":"328043"
 }
+
+###
+GET {{baseUrl}}/{{urlPath}}/signout
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
