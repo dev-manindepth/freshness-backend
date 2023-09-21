@@ -8,9 +8,9 @@ withCredentials: true
 
 {
   "username": "manish",
-  "email": "manish4123@gmail.com",
+  "email": "manish412373@gmail.com",
   "password":"328043",
-  "phoneNumber":"5320732323"
+  "phoneNumber":"5390733233"
 }
 
 ###
@@ -26,6 +26,12 @@ withCredentials: true
 
 ###
 GET {{baseUrl}}/{{urlPath}}/signout
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+###
+GET {{baseUrl}}/{{urlPath}}/currentuser
 Content-Type: application/json
 Accept: application/json
 withCredentials: true

@@ -23,4 +23,11 @@ export class Helper {
 
     return result;
   };
+  static parseJSON(data:string):any{
+    try{
+      return JSON.parse(data);
+    }catch(err){
+      return data;
+    }
+  }
 }

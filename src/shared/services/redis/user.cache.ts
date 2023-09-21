@@ -34,6 +34,25 @@ class UserCache extends BaseCache {
       throw new ServerError('Server error. Try again');
     }
   }
+  public async getUserDataFromCache(userObjectId: string): Promise<IUserDocument | null> {
+    try {
+      if (!this.client.isOpen) {
+        await this.client.connect();
+      }
+      const userDocument: IUserDocument = (await this.client.HGETALL(`users:${userObjectId}`)) as unknown as IUserDocument;
+      const { notifications, reviews, cart, orders, wishlist, createdAt } = userDocument;
+      userDocument.notifications = Helper.parseJSON(`${notifications}`);
+      userDocument.reviews = Helper.parseJSON(`${reviews}`);
+      userDocument.cart = Helper.parseJSON(`${cart}`);
+      userDocument.orders = Helper.parseJSON(`${orders}`);
+      userDocument.wishlist = Helper.parseJSON(`${wishlist}`);
+      userDocument.createdAt = new Date(`${createdAt}`);
+      return userDocument;
+    } catch (err) {
+      this.log.error(err);
+      throw new ServerError('Server error . Try again');
+    }
+  }
 }
 
 export const userCache: UserCache = new UserCache();

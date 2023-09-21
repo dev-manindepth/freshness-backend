@@ -59,12 +59,15 @@ export class FreshnessServer {
     app.all('*', (req: Request, res: Response) => {
       res.status(HTTP_STATUS.NOT_FOUND).json({ message: `${req.originalUrl} not found` });
     });
-    app.use((error: IErrorResponse, _req: Request, res: Response, next: NextFunction) => {
+    app.use((error: IErrorResponse | Error, _req: Request, res: Response, _next: NextFunction) => {
       log.error(error);
       if (error instanceof CustomError) {
         return res.status(error.statusCode).json(error.serializeErrors());
+      } else {
+        return res
+          .status(HTTP_STATUS.INTERNAL_SERVER_ERROR)
+          .json({ status: 'INTERNAL SERVER ERROR', message: 'Something went wrong', statusCode: HTTP_STATUS.INTERNAL_SERVER_ERROR });
       }
-      next();
     });
   }
   private async createSocketIO(httpServer: http.Server): Promise<Server> {

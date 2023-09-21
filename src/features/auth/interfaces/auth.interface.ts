@@ -12,9 +12,6 @@ declare global {
 export interface AuthPayload {
   userId: string;
   uId: string;
-  email: string;
-  username: string;
-  phoneNumber: string;
   iat?: number;
 }
 export interface IAuthDocument extends Document {
