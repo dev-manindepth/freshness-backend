@@ -2,11 +2,11 @@ import { config } from '@root/config';
 import Queue, { Job, ProcessCallbackFunction } from 'bull';
 import Logger from 'bunyan';
 import { createBullBoard, BullAdapter, ExpressAdapter } from '@bull-board/express';
-import { IAuthJob } from '@auth/interfaces/auth.interface';
+import { IAuthJob, IMailJob } from '@auth/interfaces/auth.interface';
 let bullAdapters: BullAdapter[] = [];
 export let serverAdapter: ExpressAdapter;
 
-type IBaseJob = IAuthJob;
+type IBaseJob = IAuthJob | IMailJob;
 export abstract class BaseQueue {
   queue: Queue.Queue;
   log: Logger;

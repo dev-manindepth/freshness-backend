@@ -7,10 +7,10 @@ Accept: application/json
 withCredentials: true
 
 {
-  "username": "manish",
-  "email": "manish412373@gmail.com",
+  "username": "manish test email",
+  "email": "mitchel.lemke47@ethereal.email",
   "password":"328043",
-  "phoneNumber":"5390733233"
+  "phoneNumber":"5390734233"
 }
 
 ###
@@ -20,7 +20,7 @@ Accept: application/json
 withCredentials: true
 
 {
-  "email": "manish4123@gmail.com",
+  "email": "mitchel.lemke47@ethereal.email",
   "password":"328043"
 }
 
@@ -35,3 +35,24 @@ GET {{baseUrl}}/{{urlPath}}/currentuser
 Content-Type: application/json
 Accept: application/json
 withCredentials: true
+
+###
+POST {{baseUrl}}/{{urlPath}}/forgot-password
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "email": "mitchel.lemke47@ethereal.email"
+}
+
+###
+POST {{baseUrl}}/{{urlPath}}/reset-password/fg
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "password": "328043",
+  "confirmPassword":"328043"
+}
