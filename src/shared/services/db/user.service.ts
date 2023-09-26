@@ -21,26 +21,26 @@ class UserService {
         $project: this.projectAggregation()
       }
     ];
-    const user:IUserDocument[] = await UserModel.aggregate(userQueryPipeline);
+    const user: IUserDocument[] = await UserModel.aggregate(userQueryPipeline);
     return user[0];
   }
-  public async getUserByUserId(userId:string):Promise<IUserDocument>{
-      const userQueryPipeline = [
-        {
-          $match: { _id: new mongoose.Types.ObjectId(userId) }
-        },
-        {
-          $lookup: { from: 'Auth', localField: 'authId', foreignField :'_id',as:'authId'}
-        },
-        {
-          $unwind: '$authId'
-        },
-        {
-          $project: this.projectAggregation()
-        }
-      ];
-      const user:IUserDocument[] = await UserModel.aggregate(userQueryPipeline);
-      return user[0];
+  public async getUserByUserId(userId: string): Promise<IUserDocument> {
+    const userQueryPipeline = [
+      {
+        $match: { _id: new mongoose.Types.ObjectId(userId) }
+      },
+      {
+        $lookup: { from: 'Auth', localField: 'authId', foreignField: '_id', as: 'authId' }
+      },
+      {
+        $unwind: '$authId'
+      },
+      {
+        $project: this.projectAggregation()
+      }
+    ];
+    const user: IUserDocument[] = await UserModel.aggregate(userQueryPipeline);
+    return user[0];
   }
   private projectAggregation() {
     return {

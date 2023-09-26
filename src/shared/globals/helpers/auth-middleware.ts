@@ -33,30 +33,4 @@ class AuthMiddleware {
   }
 }
 
-class AuthMiddleware2 {
-  public async verifyUser(req: Request, _res: Response, next: NextFunction): Promise<void> {
-    try {
-      if (!req.session?.jwt) {
-        return next(new NotAuthorizedError('Token is not available . Please login again'));
-      }
-
-      const payload: AuthPayload = JWT.verify(req.session?.jwt, config.JWT_TOKEN!) as AuthPayload;
-      req.currentUser = payload;
-      next();
-    } catch (err) {
-      next(err); // Pass the error to the next middleware (global error handler)
-    }
-  }
-
-  public async checkAuthentication(req: Request, _res: Response, next: NextFunction): Promise<void> {
-    try {
-      if (!req.currentUser) {
-        return next(new NotAuthorizedError('Authentication is required to access this route'));
-      }
-      next();
-    } catch (err) {
-      next(err); // Pass the error to the next middleware (global error handler)
-    }
-  }
-}
 export const authMiddleware: AuthMiddleware = new AuthMiddleware();

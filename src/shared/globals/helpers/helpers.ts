@@ -6,6 +6,7 @@ export class Helper {
 
     return randomInteger;
   }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static stringifyObject = (data: Record<string, any>): Record<string, string> => {
     const result: Record<string, string> = {};
 
@@ -23,10 +24,11 @@ export class Helper {
 
     return result;
   };
-  static parseJSON(data:string):any{
-    try{
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  static parseJSON(data: string): any {
+    try {
       return JSON.parse(data);
-    }catch(err){
+    } catch (err) {
       return data;
     }
   }

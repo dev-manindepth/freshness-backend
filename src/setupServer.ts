@@ -59,7 +59,8 @@ export class FreshnessServer {
     app.all('*', (req: Request, res: Response) => {
       res.status(HTTP_STATUS.NOT_FOUND).json({ message: `${req.originalUrl} not found` });
     });
-    app.use((error: IErrorResponse | Error, _req: Request, res: Response, _next: NextFunction) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    app.use((error: IErrorResponse | Error, _req: Request, res: Response, next: NextFunction) => {
       log.error(error);
       if (error instanceof CustomError) {
         return res.status(error.statusCode).json(error.serializeErrors());
@@ -104,5 +105,6 @@ export class FreshnessServer {
       log.error(error);
     }
   }
-  private socketIOConnections(_io: Server): void {}
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  private socketIOConnections(io: Server): void {}
 }

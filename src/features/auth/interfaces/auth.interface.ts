@@ -48,10 +48,10 @@ export interface IAuthJob {
   value?: string | IAuthDocument | IUserDocument;
 }
 
-export interface IMailJob{
-  receiverEmail:string;
-  subject:string;
-  template:string;
+export interface IMailJob {
+  receiverEmail: string;
+  subject: string;
+  template: string;
 }
 
 export interface IResetPassword {
