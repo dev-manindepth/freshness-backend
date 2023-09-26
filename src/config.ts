@@ -13,6 +13,11 @@ class Config {
   public CLOUD_NAME: string | undefined;
   public CLOUD_API_KEY: string | undefined;
   public CLOUD_API_SECRET: string | undefined;
+  public SENDER_EMAIL: string | undefined;
+  public SENDER_PASSWORD: string | undefined;
+  public SENDGRID_API_KEY: string | undefined;
+  public SENDGRID_API_SECRET: string | undefined;
+
   private readonly DEFAULT_DATABASE_URL = 'mongodb://localhost:27017';
   constructor() {
     this.DATABASE_URL = process.env.DATABASE_URL || this.DEFAULT_DATABASE_URL;
@@ -25,6 +30,10 @@ class Config {
     this.CLOUD_NAME = process.env.CLOUD_NAME;
     this.CLOUD_API_KEY = process.env.CLOUD_API_KEY;
     this.CLOUD_API_SECRET = process.env.CLOUD_API_SECRET;
+    this.SENDER_EMAIL = process.env.SENDER_EMAIL;
+    this.SENDER_PASSWORD = process.env.SENDER_PASSWORD;
+    this.SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
+    this.SENDGRID_API_SECRET = process.env.SENDGRID_API_SECRET;
   }
   public createLogger(name: string): bunyan {
     return bunyan.createLogger({ name: name, level: 'debug' });
